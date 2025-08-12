@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agreements - QuickSign Pro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="agreements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-signature"></i>
+                <span>QuickSign Pro</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="btn-login" id="loginBtn">Login</button></li>
+                <li><button class="btn-signup" id="signupBtn">Sign Up</button></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Agreements Page Content -->
+    <div class="agreements-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Start Now</h2>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-item active" data-section="inbox">
+                    <i class="fas fa-inbox"></i>
+                    <span>Inbox</span>
+                </div>
+                <div class="menu-item" data-section="sent">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Sent</span>
+                </div>
+                <div class="menu-item" data-section="drafts">
+                    <i class="fas fa-edit"></i>
+                    <span>Drafts</span>
+                </div>
+                <div class="menu-item" data-section="completed">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Completed</span>
+                </div>
+                <div class="menu-item" data-section="action-required">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Action Required</span>
+                </div>
+                <div class="menu-item" data-section="waiting">
+                    <i class="fas fa-clock"></i>
+                    <span>Waiting for Others</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='signature-manager.html'">
+                    <i class="fas fa-cogs"></i>
+                    <span>إدارة التوقيعات</span>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <div class="menu-item" data-section="templates">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Templates</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="content-header">
+                <div class="header-left">
+                    <h1>Inbox</h1>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search Inbox and Folders">
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="filter-options">
+                        <select class="filter-select">
+                            <option>Last 6 months</option>
+                            <option>Last month</option>
+                            <option>Last week</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Status</option>
+                            <option>Completed</option>
+                            <option>Pending</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Sender</option>
+                            <option>All senders</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Advanced options</option>
+                        </select>
+                    </div>
+                    <button class="btn-clear">Clear</button>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state">
+                <div class="empty-content">
+                    <div class="empty-icon">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h2>Your inbox is empty</h2>
+                    <p>Other companies send you documents to sign, they will show up here. You can also send documents to others.</p>
+                    
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn-primary" id="sendDocumentBtn">
+                            <i class="fas fa-paper-plane"></i>
+                            Send a Document
+                        </button>
+                        <button class="btn-secondary" id="uploadDocumentBtn">
+                            <i class="fas fa-upload"></i>
+                            Upload Document
+                        </button>
+                        <button class="btn-secondary" id="createTemplateBtn">
+                            <i class="fas fa-file-plus"></i>
+                            Create Template
+                        </button>
+                        <button class="btn-secondary" id="requestSignatureBtn">
+                            <i class="fas fa-signature"></i>
+                            Request Signature
+                        </button>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="quick-action-grid">
+                            <div class="quick-action-item" data-action="contract">
+                                <i class="fas fa-file-contract"></i>
+                                <span>Create Contract</span>
+                            </div>
+                            <div class="quick-action-item" data-action="nda">
+                                <i class="fas fa-user-secret"></i>
+                                <span>NDA Agreement</span>
+                            </div>
+                            <div class="quick-action-item" data-action="invoice">
+                                <i class="fas fa-file-invoice"></i>
+                                <span>Invoice</span>
+                            </div>
+                            <div class="quick-action-item" data-action="proposal">
+                                <i class="fas fa-handshake"></i>
+                                <span>Business Proposal</span>
+                            </div>
+                            <div class="quick-action-item" data-action="agreement">
+                                <i class="fas fa-file-signature"></i>
+                                <span>Service Agreement</span>
+                            </div>
+                            <div class="quick-action-item" data-action="form">
+                                <i class="fas fa-clipboard-list"></i>
+                                <span>Custom Form</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content upload-modal">
+            <span class="close" id="uploadModalClose">&times;</span>
+            <h2>Upload Document</h2>
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>Drag and drop your document here</h3>
+                <p>or click to browse files</p>
+                <input type="file" id="fileInput" accept=".pdf,.doc,.docx" hidden>
+                <button class="btn-browse" id="browseFilesBtn">Browse Files</button>
+            </div>
+            <div class="supported-formats">
+                <p>Supported formats: PDF, DOC, DOCX</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template Modal -->
+    <div id="templateModal" class="modal">
+        <div class="modal-content template-modal">
+            <span class="close" id="templateModalClose">&times;</span>
+            <h2>Choose Template</h2>
+            <div class="template-grid">
+                <div class="template-card" data-template="contract">
+                    <i class="fas fa-file-contract"></i>
+                    <h3>Contract Template</h3>
+                    <p>Standard business contract</p>
+                </div>
+                <div class="template-card" data-template="nda">
+                    <i class="fas fa-user-secret"></i>
+                    <h3>NDA Template</h3>
+                    <p>Non-disclosure agreement</p>
+                </div>
+                <div class="template-card" data-template="invoice">
+                    <i class="fas fa-file-invoice"></i>
+                    <h3>Invoice Template</h3>
+                    <p>Professional invoice</p>
+                </div>
+                <div class="template-card" data-template="proposal">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Proposal Template</h3>
+                    <p>Business proposal</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Request Signature Modal -->
+    <div id="requestSignatureModal" class="modal">
+        <div class="modal-content request-signature-modal">
+            <span class="close" id="requestSignatureModalClose">&times;</span>
+            <div class="modal-header">
+                <h2>Request Signature</h2>
+                <div class="modal-steps">
+                    <div class="step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Add documents</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Add recipients</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Add message</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Step 1: Add Documents -->
+                <div class="step-content active" id="step1">
+                    <div class="step-header">
+                        <h3>Add documents</h3>
+                        <button class="btn-collapse" id="collapseStep1">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                    </div>
+                    <div class="document-upload-area" id="documentUploadArea">
+                        <div class="upload-placeholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drop your files here or</p>
+                            <button class="btn-browse" id="browseDocumentsBtn">Loading...</button>
+                            <input type="file" id="documentFileInput" accept=".pdf,.doc,.docx" multiple hidden>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Add Recipients -->
+                <div class="step-content" id="step2">
+                    <div class="step-header">
+                        <h3>Add recipients</h3>
+                        <button class="btn-collapse" id="collapseStep2">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="step-body collapsed">
+                        <div class="recipient-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="setSigningOrder">
+                                <span class="checkmark"></span>
+                                Set signing order
+                                <i class="fas fa-info-circle tooltip-icon" title="Recipients will sign in the order you specify"></i>
+                            </label>
+                        </div>
+                        <div class="recipients-list">
+                            <div class="recipient-item">
+                                <div class="recipient-info">
+                                    <label for="recipientName">Name *</label>
+                                    <input type="text" id="recipientName" placeholder="Enter name" required>
+                                </div>
+                                <div class="recipient-info">
+                                    <label for="recipientEmail">Email *</label>
+                                    <input type="email" id="recipientEmail" placeholder="Enter email" required>
+                                </div>
+                                <div class="recipient-actions">
+                                    <select id="recipientRole">
+                                    <option value="needs-to-sign">Needs to Sign</option>
+                                    <option value="in-person">In Person Signer</option>
+                                    <option value="receives-copy">Receives a Copy</option>
+                                    <option value="needs-to-view">Needs to View</option>
+                                </select>
+                                    <div class="customize-dropdown">
+                                         <button class="btn-customize" id="customizeRecipient" title="Customize">
+                                             Customize <i class="fas fa-chevron-down"></i>
+                                         </button>
+                                         <div class="customize-menu" id="customizeMenu">
+                                             <div class="customize-option">
+                                                 <i class="fas fa-key"></i>
+                                                 <div class="option-content">
+                                                     <h4>Add access code</h4>
+                                                     <p>Enter a code that only you and this recipient know.</p>
+                                                 </div>
+                                             </div>
+                                             <div class="customize-option">
+                                                 <i class="fas fa-comment"></i>
+                                                 <div class="option-content">
+                                                     <h4>Add private message</h4>
+                                                     <p>Include a personal note with this recipient.</p>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-add-recipient" id="addRecipientBtn">
+                            <i class="fas fa-plus"></i>
+                            Add Recipient
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Add Message -->
+                <div class="step-content" id="step3">
+                    <div class="step-header">
+                        <h3>Add message</h3>
+                        <button class="btn-collapse" id="collapseStep3">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="step-body collapsed">
+                        <div class="message-fields">
+                            <div class="field-group">
+                                <label for="emailSubject">Email Subject *</label>
+                                <input type="text" id="emailSubject" placeholder="Please DocuSign: Document Name" required>
+                            </div>
+                            <div class="field-group">
+                                <label for="emailMessage">Email Message</label>
+                                <textarea id="emailMessage" placeholder="Enter your message here..." rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="footer-actions">
+                    <button class="btn-secondary" id="cancelRequestBtn">Cancel</button>
+                    <button class="btn-primary" id="nextBtn" disabled>
+                        <i class="fas fa-arrow-right"></i>
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- Document Editor Modal -->
+<div id="documentEditorModal" class="modal">
+    <div class="modal-content document-editor-content">
+        <div class="editor-header">
+            <h2>Prepare Document</h2>
+            <button class="modal-close" id="documentEditorClose">&times;</button>
+        </div>
+        
+        <div class="editor-body">
+            <div class="editor-sidebar">
+                <div class="recipients-panel">
+                    <h3>Recipients</h3>
+                    <div id="recipientsList" class="recipients-list-editor"></div>
+                </div>
+                
+                <div class="fields-panel">
+                    <h3>Add Fields</h3>
+                    <div class="field-buttons">
+                        <button class="field-btn" data-field="signature">
+                            <i class="fas fa-signature"></i>
+                            Signature
+                        </button>
+                        <button class="field-btn" data-field="initial">
+                            <i class="fas fa-font"></i>
+                            Initial
+                        </button>
+                        <button class="field-btn" data-field="date">
+                            <i class="fas fa-calendar"></i>
+                            Date Signed
+                        </button>
+                        <button class="field-btn" data-field="text">
+                            <i class="fas fa-text-width"></i>
+                            Text
+                        </button>
+                        <button class="field-btn" data-field="checkbox">
+                            <i class="fas fa-check-square"></i>
+                            Checkbox
+                        </button>
+                        <button class="field-btn" data-field="radio">
+                            <i class="fas fa-dot-circle"></i>
+                            Radio Button
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="document-viewer">
+                <div class="document-controls">
+                    <div class="zoom-controls">
+                        <button id="zoomOut"><i class="fas fa-minus"></i></button>
+                        <span id="zoomLevel">100%</span>
+                        <button id="zoomIn"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <div class="page-controls">
+                        <button id="prevPage"><i class="fas fa-chevron-left"></i></button>
+                        <span id="pageInfo">Page 1 of 1</span>
+                        <button id="nextPage"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="document-canvas">
+                    <div id="documentPreview" class="document-preview">
+                        <!-- Document will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="editor-footer">
+            <button class="btn-secondary" id="backToSetupBtn">Back</button>
+            <button class="btn-primary" id="sendForSignatureBtn">
+                <i class="fas fa-paper-plane"></i>
+                Send for Signature
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="agreements.js"></script>
+</body>
+</html>

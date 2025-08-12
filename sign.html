@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توقيع المستند - QuickSign Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="sign.css">
+    <style>
+        .signature-field {
+            border: 2px dashed #2563eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .signature-field:hover {
+            background: #e0f2fe;
+            border-color: #1d4ed8;
+        }
+        
+        .signature-field.signed {
+            background: #d1fae5;
+            border-color: #10b981;
+            cursor: default;
+        }
+        
+        .signature-field.signed:hover {
+            background: #d1fae5;
+        }
+        
+        .field-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .field-placeholder {
+            color: #6b7280;
+            font-style: italic;
+        }
+        
+        .field-value {
+            font-weight: 600;
+            color: #059669;
+        }
+        
+        .field-status {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #10b981;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .field-status.pending {
+            background: #f59e0b;
+        }
+        
+        .progress-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            transition: width 0.3s ease;
+        }
+        
+        .signer-info-card {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .order-indicator {
+            background: #2563eb;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="sign-header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-file-signature"></i>
+                <span>QuickSign Pro</span>
+            </div>
+            <div class="document-info">
+                <span class="document-title" id="documentTitle">جاري تحميل المستند...</span>
+                <span class="request-status" id="requestStatus">في انتظار توقيعك</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="sign-main">
+        <!-- Document Viewer -->
+        <section class="document-viewer">
+            <!-- Progress Section -->
+            <div class="progress-container">
+                <h3><i class="fas fa-tasks"></i> تقدم التوقيع</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <p id="progressText">0 من 0 حقول مكتملة</p>
+            </div>
+            
+            <!-- Signer Info -->
+            <div class="signer-info-card">
+                <div style="display: flex; align-items: center;">
+                    <div class="order-indicator" id="signerOrder">1</div>
+                    <div>
+                        <h3 id="recipientName">جاري التحميل...</h3>
+                        <p id="recipientEmail">جاري التحميل...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="document-header">
+                <h2><i class="fas fa-file-alt"></i> المستند المطلوب توقيعه</h2>
+            </div>
+
+            <div class="document-container">
+                <div class="document-content" id="documentContent">
+                    <!-- Document content will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Signature Fields Section -->
+            <div class="signature-section">
+                <h3><i class="fas fa-signature"></i> حقول التوقيع المطلوبة</h3>
+                <div id="signatureFields" class="signature-fields-container">
+                    <!-- Signature fields will be loaded here -->
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="completeSigningBtn" disabled>
+                        <i class="fas fa-check"></i>
+                        إكمال التوقيع
+                    </button>
+                    <button class="btn btn-secondary" id="downloadBtn">
+                        <i class="fas fa-download"></i>
+                        تحميل نسخة
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Simple Signature Modal -->
+    <div id="signatureModal" class="signature-modal">
+        <div class="signature-modal-content">
+            <div class="signature-modal-header">
+                <h3>Add Signature</h3>
+                <button class="signature-modal-close" id="signatureModalClose">&times;</button>
+            </div>
+            <div class="signature-modal-body">
+                <div class="signature-options">
+                    <div class="signature-option" id="drawOption">
+                        <h4>Draw your signature</h4>
+                        <canvas id="signatureCanvas" width="400" height="150"></canvas>
+                        <button id="clearCanvas" class="btn-clear">Clear</button>
+                    </div>
+                    
+                    <div class="signature-option" id="typeOption">
+                        <h4>Type your name</h4>
+                        <input type="text" id="typedSignature" placeholder="Type your full name">
+                        <div class="signature-preview" id="signaturePreview">Signature preview</div>
+                    </div>
+                </div>
+            </div>
+            <div class="signature-modal-footer">
+                <button class="btn btn-secondary" id="cancelSignature">Cancel</button>
+                <button class="btn btn-primary" id="applySignature">Apply Signature</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-modal-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Successfully Signed!</h2>
+            <p>Thank you for signing the document. A signed copy will be sent to all parties.</p>
+            <div class="success-actions">
+                <button class="btn btn-primary" id="downloadSignedBtn">
+                    <i class="fas fa-download"></i>
+                    Download Signed Document
+                </button>
+                <button class="btn btn-secondary" id="closeSuccessBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="enhanced-sign.js"></script>
+</body>
+</html>

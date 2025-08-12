@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signed Document - QuickSign Pro</title>
+    <link rel="stylesheet" href="sign.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .signed-document-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .signed-header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 30px;
+        }
+        
+        .signed-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #10b981;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .document-info {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #374151;
+        }
+        
+        .info-value {
+            color: #6b7280;
+        }
+        
+        .document-content {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            background: #fafafa;
+            position: relative;
+        }
+        
+        .signed-watermark {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .signature-field-signed {
+            border: 2px solid #10b981;
+            background: #f0fdf4;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            position: relative;
+        }
+        
+        .signature-display {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 24px;
+            color: #065f46;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .signature-info {
+            font-size: 12px;
+            color: #6b7280;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        
+        .verification-section {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .verification-title {
+            color: #1e40af;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .verification-details {
+            font-size: 14px;
+            color: #374151;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="signed-document-container">
+            <div class="signed-header">
+                <div class="signed-badge">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Document Signed</span>
+                </div>
+                <h1>Document Successfully Signed</h1>
+                <p>All required signatures have been collected and the document is now legally binding</p>
+            </div>
+            
+            <div class="document-info">
+                <div class="info-row">
+                    <span class="info-label">Document Name:</span>
+                    <span class="info-value" id="documentName">Carrier Agreement</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Completion Date:</span>
+                    <span class="info-value" id="completionDate">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Signer:</span>
+                    <span class="info-value" id="signerName">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value" id="signerEmail">-</span>
+                </div>
+            </div>
+            
+            <div class="document-content">
+                <div class="signed-watermark">
+                    <i class="fas fa-stamp"></i> SIGNED
+                </div>
+                
+                <div id="documentContentSigned">
+                    <!-- Document content will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="verification-section">
+                <div class="verification-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Digital Verification Information
+                </div>
+                <div class="verification-details">
+                    <p><strong>Platform:</strong> QuickSign Pro</p>
+                    <p><strong>Verification Status:</strong> Complete ✓</p>
+                    <p><strong>Digital Signature:</strong> Valid and Certified</p>
+                    <p><strong>Security:</strong> Protected with SSL Encryption</p>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary" onclick="downloadPDF()">
+                    <i class="fas fa-download"></i>
+                    Download PDF
+                </a>
+                <a href="#" class="btn btn-secondary" onclick="printDocument()">
+                    <i class="fas fa-print"></i>
+                    Print
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Extract request ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const requestId = urlParams.get('id') || window.location.pathname.split('/').pop().replace('.html', '');
+        
+        // Load signed document data
+        function loadSignedDocumentData() {
+            try {
+                // Load completion data
+                const completionData = localStorage.getItem(`document_completed_${requestId}`);
+                if (completionData) {
+                    const data = JSON.parse(completionData);
+                    
+                    // Update completion date
+                    if (data.completedAt) {
+                        const date = new Date(data.completedAt);
+                        document.getElementById('completionDate').textContent = date.toLocaleDateString('en-US');
+                    }
+                }
+                
+                // Load signature request data
+                const signatureRequestData = localStorage.getItem(`signature_request_${requestId}`);
+                if (signatureRequestData) {
+                    const data = JSON.parse(signatureRequestData);
+                    
+                    // Update document name
+                    if (data.documentName) {
+                        document.getElementById('documentName').textContent = data.documentName;
+                        document.title = `Signed Document: ${data.documentName}`;
+                    }
+                    
+                    // Find the signer
+                    const signer = data.recipients.find(r => r.role === 'Needs to Sign') || data.recipients[0];
+                    if (signer) {
+                        document.getElementById('signerName').textContent = signer.name;
+                        document.getElementById('signerEmail').textContent = signer.email;
+                    }
+                }
+                
+                // Load and display document content with signatures
+                loadDocumentContentSigned();
+                
+            } catch (error) {
+                console.error('Error loading signed document data:', error);
+            }
+        }
+        
+        function loadDocumentContentSigned() {
+            const documentContent = `
+                <h2 style="text-align: center; color: #1f2937; margin-bottom: 30px;">Carrier Agreement</h2>
+                
+                <div style="margin-bottom: 30px; line-height: 1.8; color: #374151;">
+                    <p>This agreement is executed between the parties mentioned above and has been signed electronically using the QuickSign Pro digital signature platform.</p>
+                    
+                    <p>All signatures have been verified and the document is legally binding.</p>
+                    
+                    <div style="margin: 30px 0;">
+                        <h3 style="color: #1f2937; margin-bottom: 15px;">Agreement Terms:</h3>
+                        <ul style="padding-left: 20px;">
+                            <li>The carrier commits to delivering goods on time</li>
+                            <li>Must maintain the safety of goods during transport</li>
+                            <li>The carrier assumes responsibility for any damage that occurs during transport</li>
+                            <li>Must notify the sender of any potential delays</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 50px;">
+                    <div class="signature-field-signed">
+                        <div class="signature-display">Carrier Representative Signature</div>
+                        <div class="signature-info">
+                            Digitally signed on: ${new Date().toLocaleDateString('en-US')}<br>
+                            Platform: QuickSign Pro
+                        </div>
+                    </div>
+                    
+                    <div class="signature-field-signed" style="margin-top: 20px;">
+                        <div class="signature-display">${new Date().toLocaleDateString('en-US')}</div>
+                        <div class="signature-info">
+                            Signature Date<br>
+                            Digitally Verified
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('documentContentSigned').innerHTML = documentContent;
+        }
+        
+        function downloadPDF() {
+            alert('PDF download feature will be available soon');
+        }
+        
+        function printDocument() {
+            window.print();
+        }
+        
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadSignedDocumentData);
+    </script>
+</body>
+</html>
